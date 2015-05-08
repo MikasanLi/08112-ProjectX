@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjectX
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string x;
+            bool f;
+            int a, z, g;
+
+            Console.Write("Input a string of characters: ");
+            x = Console.ReadLine();
+            g = x.Length;
+            z = g - 1;
+            a = 0;
+
+            if (g == 1)
+                //If only 1 character in string
+                f = true;
+            else
+            {
+                f = true;
+                while (f && a < z)
+                {
+                    while (x[a] == ' ' || x[a] == ',' || x[a] == ';' || x[a] == '!' || x[a] == '?' || x[a] == '.')
+                    {
+                        //While special character at position a in x, skip to next character
+                        a++;
+                    }
+                    while (x[z] == ' ' || x[z] == ',' || x[z] == ';' || x[z] == '!' || x[z] == '?' || x[z] == '.')
+                    {
+                        //While special character at position z in x, skip backwards to next character
+                        z--;
+                    }
+
+                    if (char.ToUpper(x[a]) == char.ToUpper(x[z]))
+                    {
+                        //If character at a is the same at z, move to next comparison
+                        a++;
+                        z--;
+                    }
+                    else
+                        //If reached here, compared characters are not identical
+                        f = false;
+                }
+            }
+
+            if (!f)
+            {
+                //If any compared pair of characters are not identical, print message
+                Console.WriteLine("Length: {0}   a: {1}   z: {2}\nCharacters are not palindromic.", g, a, z);
+            }
+            else
+            {
+                //If all compared pairs of characters are identical, print message
+                Console.WriteLine("Length: {0}   a: {1}   z: {2}\nCharacters are palindromic.", g, a, z);
+            }
+            Console.ReadLine();
+        }
+    }
+}
